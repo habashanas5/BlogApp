@@ -1,7 +1,7 @@
 # Blog Listing Application
 
 ## Description
-This is a Blog Listing Application built using ASP.NET Core MVC and SQLite with Entity Framework Core. The application allows users to:
+This is a Blog Listing Application built using ASP.NET Core MVC and SQL Server Management Studio with Entity Framework Core. The application allows users to:
 
 - View a list of blog posts with pagination.
 - View the details of individual blog posts.
