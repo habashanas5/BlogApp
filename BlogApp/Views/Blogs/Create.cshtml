@@ -1,0 +1,77 @@
+﻿@model BlogApp.Models.Blog
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="d-flex justify-content-center align-items-center">Create Blog</h1>
+
+<hr />
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <fieldset class="w-50">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Table for Form Fields -->
+            <table class="table table-bordered">
+                <tr>
+                    <td class="fw-bold">Title</td>
+                    <td>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="fw-bold">Content</td>
+                    <td>
+                        <textarea asp-for="Content" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="fw-bold">Author</td>
+                    <td>
+                        <input asp-for="Author" class="form-control" />
+                        <span asp-validation-for="Author" class="text-danger"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="fw-bold">Date</td>
+                    <td>
+                        <input asp-for="Date" class="form-control" type="date" />
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="fw-bold">Category</td>
+                    <td>
+                        <select asp-for="Category" class="form-select" asp-items="@(new SelectList(ViewData["Categories"] as List<string>))">
+                            <option value="">-- Select a Category --</option>
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                <input type="submit" value="Create" class="btn btn-primary" style="padding:10px;margin-top:10px" />
+            </div>
+        </form>
+
+        <hr />
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+        </div>
+    </fieldset>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

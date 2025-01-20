@@ -1,0 +1,49 @@
+﻿@model BlogApp.Models.Blog
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Blog Details</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th class="text-center fw-bold" style="width: 30%;">@Html.DisplayNameFor(model => model.Title)</th>
+                                <td>@Html.DisplayFor(model => model.Title)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center fw-bold">@Html.DisplayNameFor(model => model.Content)</th>
+                                <td>@Html.DisplayFor(model => model.Content)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center fw-bold">@Html.DisplayNameFor(model => model.Author)</th>
+                                <td>@Html.DisplayFor(model => model.Author)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center fw-bold">@Html.DisplayNameFor(model => model.Date)</th>
+                                <td>@Html.DisplayFor(model => model.Date)</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center fw-bold">@Html.DisplayNameFor(model => model.Category)</th>
+                                <td>@Html.DisplayFor(model => model.Category)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 justify-content-center">
+        <div class="col-md-6 text-center">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary me-2">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

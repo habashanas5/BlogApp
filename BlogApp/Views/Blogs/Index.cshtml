@@ -1,0 +1,97 @@
+﻿@model IEnumerable<BlogApp.Models.Blog>
+
+@{
+    ViewData["Title"] = "Blogs";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Blog Listing Application</h1>
+
+
+
+    <div class="d-flex justify-content-start">
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </div>
+
+    <div class="d-flex justify-content-end mb-3">
+        <label for="categoryFilter" class="me-2 d-flex align-items-center">
+        </label>
+        <select id="categoryFilter" class="form-select form-select-sm" onchange="filterBlogs()" style="width: auto;">
+            <option value="">-- All Categories --</option>
+            <option value="Technology">Technology</option>
+            <option value="Lifestyle">Lifestyle</option>
+            <option value="Travel">Travel</option>
+            <option value="Education">Education</option>
+            <option value="Health">Health</option>
+            <option value="Career">Career</option>
+            <option value="Business">Business</option>
+            <option value="Fitness">Fitness</option>
+        </select>
+    </div>
+
+    <div class="table-responsive">
+        <table id="blogsTable" class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="blogsTableBody">
+                @foreach (var item in Model)
+                {
+                    <tr data-category="@item.Category">
+                        <td>@item.Title</td>
+                        <td>@item.Content</td>
+                        <td>@item.Author</td>
+                        <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                        <td>@item.Category</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a class="btn btn-sm btn-info text-white" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Function to filter blogs by category
+        function filterBlogs() {
+            var selectedCategory = document.getElementById('categoryFilter').value;
+            var rows = document.querySelectorAll('#blogsTableBody tr');
+
+            rows.forEach(function(row) {
+                var rowCategory = row.getAttribute('data-category');
+
+                // Show or hide row based on category selection
+                if (selectedCategory === "" || rowCategory === selectedCategory) {
+                    row.style.display = ''; // Show row
+                } else {
+                    row.style.display = 'none'; // Hide row
+                }
+            });
+        }
+
+        // Initialize DataTable
+        $(document).ready(function () {
+            $('#blogsTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "colReorder": true,
+                "pageLength": 10,
+            });
+        });
+    </script>
+}
